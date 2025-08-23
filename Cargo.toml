@@ -19,59 +19,50 @@ default     = ["tls-rustls", "http2", "json"]
 
 # TLS backend’lar (faqat bittasini yoqing; default rustls)
 tls-rustls  = ["reqwest/rustls-tls"]
+tls-native  = ["reqwest/native-tls"]
 
 # JSON imkoniyatlari
-json        = ["reqwest/json", "serde/derive"]
+json        = ["reqwest/json"]        # serde/derive allaqachon dependencies’da yoqilgan
 
 # HTTP/2 agar server qo‘llasa
 http2       = ["reqwest/http2"]
 
-
 # ----------------------------------Dependencies----------------------------------
 [dependencies]
 # ==== ASYNC RUNTIME ====
-tokio = { version = "1.39", features = ["rt-multi-thread", "macros", "time"] }
-#  rt-multi-thread: yuqori yukda ko‘p yadrodan foydalanish
-#  macros: async test va spawn makrolari
-#  time: poll interval (sleep) uchun
+tokio = { version = "1.47.1", features = ["full","rt-multi-thread", "macros", "time"] }
 
 # ==== HTTP CLIENT (TRANSPORT) ====
-reqwest = { version = "0.12", default-features = false, features = ["json", "http2", "rustls-tls"] }
-# default-features=false: native-tls o‘rniga rustls ishlatamiz (pure Rust, prod’da qulay)
-# json: .json() bilan JSON serialize/deserialize
-# http2, rustls-tls: default feature set (features orqali boshqaramiz)
+# reqwest feature’larini endi faqat [features] orqali boshqaramiz
+reqwest = { version = "0.12.23", default-features = false, features = [] }
 
 # ==== JSON / SERDE ====
-serde      = { version = "1.0", features = ["derive"] }     # DTO’lar uchun #[derive(Serialize, Deserialize)]
-serde_json = "1.0"                                          # JSON parse/serialize
+serde      = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.143"
 
 # ==== XML PARSING (REPORT uchun) ====
-quick-xml = { version = "0.36", features = ["serialize"] }
-# serialize: serde bilan XML ↔ struct (Report XML’ini semantik parse qilish uchun)
+quick-xml = { version = "0.38.2", features = ["serialize"] }
 
 # ==== ERROR MODELLASH (toza SDK xatolari) ====
-thiserror = "1.0"
+thiserror = "2.0.16"
 
 # ==== BASE64 (reportBase64 decode uchun) ====
-base64 = "0.22"
+base64 = "0.22.1"
 
 # ==== UTILITIES (foydali, lekin yengil) ====
-http  = "1.1"     # StatusCode, HeaderName/Value tiplari (kerak bo‘lsa)
-bytes = "1.6"     # Katta payloadlar bilan ishlash uchun (ixtiyoriy)
-url   = "2.5"     # URL qurish/tekshirish (ixtiyoriy)
-time  = { version = "0.3", features = ["parsing", "formatting", "macros"] }
-# time: KATM sanalari (ISO 8601) bilan ishlash (parse/format)
+http  = "1.3.1"      # StatusCode, header tiplari
+bytes = "1.10.1"     # Katta payloadlar
+url   = "2.5.7"      # URL qurish/tekshirish
+time  = { version = "0.3.41", features = ["parsing", "formatting", "macros"] }
 
 # Trait ichida async metodlar uchun ergonomic macro
-async-trait = "0.1"
+async-trait = "0.1.89"
 
 # ----------------------------------Dev-Dependencies----------------------------------
 [dev-dependencies]
-# Testlar uchun runtime + JSON + XML
-tokio       = { version = "1.39", features = ["rt-multi-thread", "macros", "time"] }
-serde_json  = "1.0"
-quick-xml   = { version = "0.36", features = ["serialize"] }
-# Agar parametrli test xohlasangiz:
+tokio       = { version = "1.47.1", features = ["full", "rt-multi-thread", "macros", "time"] }
+serde_json  = "1.0.143"
+quick-xml   = { version = "0.38.2", features = ["serialize"] }
 # rstest = "0.21"
 
 # ----------------------------------Metadata----------------------------------
