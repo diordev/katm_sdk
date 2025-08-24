@@ -58,6 +58,11 @@ time  = { version = "0.3.41", features = ["parsing", "formatting", "macros"] }
 # Trait ichida async metodlar uchun ergonomic macro
 async-trait = "0.1.89"
 
+# .env fayldan o‘qish uchun
+dotenvy = "0.15.7"
+dotenv-linter = "3.3.0"  # .env faylni tekshirish uchun
+serial_test = "3.2.0"   # .env bilan ishlaganda testlarni serial bajarish uchun
+
 # ----------------------------------Dev-Dependencies----------------------------------
 [dev-dependencies]
 tokio       = { version = "1.47.1", features = ["full", "rt-multi-thread", "macros", "time"] }
