@@ -47,7 +47,6 @@ impl FromStr for Language {
 }
 
 impl Language {
-    
     /// `FromStr` trait’idan foydalanib, tilni parse qiladi.
     pub fn try_parse(s: &str) -> Result<Self, &'static str> {
         s.parse()

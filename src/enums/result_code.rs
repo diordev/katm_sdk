@@ -45,11 +45,12 @@ impl From<&'static str> for ResultCode {
     }
 }
 
-
 /// Agar sizning javob kodingiz heap’da (`String`) bo‘lsa:
 impl From<String> for ResultCode {
     fn from(s: String) -> Self {
-        if s == "05000" { ResultCode::Ok } else {
+        if s == "05000" {
+            ResultCode::Ok
+        } else {
             // String’ni ownership bilan saqlamoqchi bo‘lsangiz dizaynni o‘zgartiring
             // (masalan, ResultCode::Other(String)). Hozircha eng yengil varianti:
             // static hayot sikliga mos bo‘lmagani uchun to‘g‘ridan-to‘g‘ri o‘girmaymiz.

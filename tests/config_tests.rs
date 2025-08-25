@@ -1,5 +1,5 @@
-use katm_sdk::config::KatmConfig;
 use dotenvy::dotenv;
+use katm_sdk::config::KatmConfig;
 use serial_test::serial;
 use std::env;
 

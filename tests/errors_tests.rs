@@ -4,7 +4,10 @@ use katm_sdk::errors::{KatmError, KatmResult};
 #[test]
 fn display_formats_are_correct() {
     let e = KatmError::Validation("PINFL uzunligi 14 bo‘lishi kerak".into());
-    assert_eq!(e.to_string(), "Validation error: PINFL uzunligi 14 bo‘lishi kerak");
+    assert_eq!(
+        e.to_string(),
+        "Validation error: PINFL uzunligi 14 bo‘lishi kerak"
+    );
 
     let e = KatmError::Transport("TLS handshake failed".into());
     assert_eq!(e.to_string(), "Transport error: TLS handshake failed");
@@ -16,7 +19,10 @@ fn display_formats_are_correct() {
     assert_eq!(e.to_string(), "Auth error: Token expired");
 
     let e = KatmError::External("KATM-403: Forbidden".into());
-    assert_eq!(e.to_string(), "External provider error: KATM-403: Forbidden");
+    assert_eq!(
+        e.to_string(),
+        "External provider error: KATM-403: Forbidden"
+    );
 
     let e = KatmError::Timeout;
     assert_eq!(e.to_string(), "Timeout while waiting for result");
@@ -90,4 +96,3 @@ fn timeout_flow() {
     let r2 = wait_for_report_simulated(false);
     assert_eq!(r2.unwrap(), "ready");
 }
-
